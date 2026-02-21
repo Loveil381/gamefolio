@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Snake - Gamefolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="score-board">
+                <div class="score-label">SCORE</div>
+                <div id="score" class="score-value">0</div>
+            </div>
+            <div class="score-board">
+                <div class="score-label">HIGH SCORE</div>
+                <div id="highScore" class="score-value">0</div>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            
+            <!-- Overlays -->
+            <div id="startScreen" class="overlay active">
+                <h2>SNAKE</h2>
+                <p>Use Arrows/WASD or Swipe to move</p>
+                <button id="startBtn" class="btn">START GAME</button>
+            </div>
+
+            <div id="gameOverScreen" class="overlay">
+                <h2>GAME OVER</h2>
+                <div class="final-score">Score: <span id="finalScore">0</span></div>
+                <button id="restartBtn" class="btn">PLAY AGAIN</button>
+            </div>
+            
+            <div id="pauseScreen" class="overlay">
+                <h2>PAUSED</h2>
+                <p>Press Space or Tap to resume</p>
+            </div>
+        </div>
+        
+        <div class="controls-hint">
+            Controls: Arrows / WASD / Swipe
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

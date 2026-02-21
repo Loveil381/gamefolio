@@ -40,6 +40,16 @@ export const games: Game[] = [
         thumbnailColor: 'bg-amber-500',
         playUrl: '#',
         developmentStory: 'Logic Gates was built to help beginners understand how computers work at a fundamental level. The hardest part was building a performant graph traversal engine to simulate the flow of electricity in real-time.',
+    },
+    {
+        slug: 'snake',
+        title: 'Snake',
+        description: 'Classic snake gameplay on a grid canvas with smooth animations and neon aesthetic.',
+        techStack: [{ name: 'HTML5 Canvas' }, { name: 'Vanilla JS' }],
+        genre: 'Arcade',
+        thumbnailColor: 'bg-zinc-800',
+        playUrl: '/games/snake/index.html',
+        developmentStory: 'A standalone homage to the classic retro snake game, built entirely with vanilla JavaScript and the Canvas API. Optimized for both desktop arrow keys and mobile swipe controls.',
     }
 ];
 
