@@ -1,12 +1,13 @@
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import ContactPage from './page';
 
 // Mock framer-motion to avoid animation issues in tests
-jest.mock('framer-motion', () => ({
+vi.mock('framer-motion', () => ({
     motion: {
-        div: ({ children, ...props }: { children: React.ReactNode;[key: string]: unknown }) => <div {...props as React.HTMLAttributes<HTMLDivElement>}>{children}</div>,
-        a: ({ children, ...props }: { children: React.ReactNode;[key: string]: unknown }) => <a {...props as React.AnchorHTMLAttributes<HTMLAnchorElement>}>{children}</a>,
+        div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => <div {...props}>{children}</div>,
+        a: ({ children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => <a {...props}>{children}</a>,
     },
 }));
 
