@@ -1,0 +1,33 @@
+---
+title: "Building My Portfolio with Next.js and AI"
+date: "2026-02-21"
+tags: ["Next.js", "AI", "Portfolio", "Web Development"]
+excerpt: "A deep dive into how I built this portfolio gamefolio using Next.js App Router, Tailwind CSS, and AI assistance."
+coverImage: "/images/blog/hello-world.jpg"
+---
+
+# Welcome to my new blog!
+
+This is my very first post on the new Gamefolio platform. Let's look at how this was built.
+
+## Why Next.js?
+
+Next.js offers incredible performance and developer experience.
+
+- **Server Components:** For faster initial page loads
+- **App Router:** Simple, intuitive file-system routing
+- **MDX Support:** Writing content in Markdown while using React components
+
+Here's a quick look at some code:
+
+```typescript
+export function getPostBySlug(slug: string): Post {
+  const realSlug = slug.replace(/\.mdx$/, '');
+  const fullPath = path.join(process.cwd(), `content/blog/${realSlug}.mdx`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  // ...
+  return { frontmatter, content };
+}
+```
+
+Stay tuned for more updates!
