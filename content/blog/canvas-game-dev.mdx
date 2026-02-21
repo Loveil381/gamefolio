@@ -1,0 +1,108 @@
+---
+title: "Building Browser Games with HTML5 Canvas"
+date: "2026-02-21"
+tags: ["Game Dev", "Canvas", "JavaScript"]
+excerpt: "Learn the fundamentals of browser game development using HTML5 Canvas, using the classic Snake game as a case study."
+readingTime: "10 min read"
+---
+
+# Building Browser Games with HTML5 Canvas
+
+HTML5 Canvas is a powerful tool for creating 2D graphics and games directly in the browser without any external plugins. In this article, we'll explore the core concepts of game development—game loops, collision detection, and state management—using a classic **Snake** game as our primary case study.
+
+## The Drawing Surface: HTML5 Canvas
+
+The `<canvas>` element provides a resolution-dependent bitmap surface. To draw on it, we need to access its 2D rendering context.
+
+```javascript
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// Drawing a simple rectangle
+ctx.fillStyle = '#00f';
+ctx.fillRect(10, 10, 50, 50);
+```
+
+In Gamefolio, I wrap this logic in a React component to handle resizing and cleanup properly.
+
+## The Heart of the Game: The Loop
+
+A game is essentially a loop that runs continuously, updating the state and rendering the visuals at a high frequency (ideally 60 times per second).
+
+```javascript
+function gameLoop(timestamp) {
+  const deltaTime = timestamp - lastTime;
+  
+  update(deltaTime);
+  draw();
+  
+  requestAnimationFrame(gameLoop);
+}
+```
+
+Using `requestAnimationFrame` is superior to `setInterval` because it syncs with the monitor's refresh rate and pauses when the tab is inactive, saving battery and CPU.
+
+## State Management: More than just Coordinates
+
+For the Snake game, the state includes:
+-   The position of each segment of the snake's body.
+-   The current direction of travel.
+-   The position of the food.
+-   The current score and game state (Running, Game Over, Paused).
+
+```javascript
+let snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
+let food = { x: 15, y: 15 };
+let direction = 'RIGHT';
+```
+
+In more complex games, I use a state machine or a component-based architecture to manage transitions between different screens (Menu -> Playing -> Game Over).
+
+## Movement and Collision Detection
+
+Movement in Snake is discrete. On every "tick" of the game clock, we add a new head in the direction of travel and remove the tail.
+
+Collision detection involves checking if the new head's coordinates:
+1.  Match the food's coordinates (Eat food, grow snake).
+2.  Go out of the canvas bounds (Game over).
+3.  Match any of the snake's existing body segments (Self-collision, game over).
+
+```javascript
+function checkCollision(head) {
+  // Wall collision
+  if (head.x < 0 || head.x >= gridCountX || head.y < 0 || head.y >= gridCountY) {
+    return true;
+  }
+  
+  // Self collision
+  return snake.some(segment => segment.x === head.x && segment.y === head.y);
+}
+```
+
+## Rendering with Style
+
+To make the game feel premium, I don't just draw flat squares. I use the Canvas API to create gradients, shadows, and subtle animations.
+
+```javascript
+function drawSnake() {
+  snake.forEach((segment, index) => {
+    const gradient = ctx.createLinearGradient(
+      segment.x * size, segment.y * size,
+      (segment.x + 1) * size, (segment.y + 1) * size
+    );
+    gradient.addColorStop(0, '#22d3ee'); // cyan-400
+    gradient.addColorStop(1, '#0891b2'); // cyan-600
+    
+    ctx.fillStyle = gradient;
+    ctx.shadowBlur = index === 0 ? 10 : 0;
+    ctx.shadowColor = '#22d3ee';
+    ctx.fillRect(segment.x * size, segment.y * size, size - 1, size - 1);
+  });
+}
+```
+
+## Lessons Learned
+
+Building games for the browser teaches you a lot about performance optimization. Avoiding memory leaks in the game loop and minimizing draw calls are essential skills that translate directly back to building high-performance web applications.
+
+In the future, I plan to explore WebGL for 3D experiences, but for classic 2D games, the HTML5 Canvas API remains an incredibly versatile and powerful tool.

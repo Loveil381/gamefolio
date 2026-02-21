@@ -1,0 +1,78 @@
+---
+title: "Architecture Decisions Behind This Portfolio"
+date: "2026-02-21"
+tags: ["Next.js", "Architecture", "TypeScript"]
+excerpt: "A deep dive into the technical choices that power Gamefolio, from Next.js App Router to Vitest and MDX."
+readingTime: "8 min read"
+---
+
+# Architecture Decisions Behind Gamefolio
+
+Building a portfolio is more than just showcasing work; it's an opportunity to demonstrate technical philosophy and architectural rigor. While a simple static site would suffice for many, I wanted to build **Gamefolio** as a production-grade template for interactive, games-focused portfolios.
+
+In this post, I’ll explain why I chose the specific stack of Next.js, TailwindCSS, MDX, and Vitest, and how I structured the application to balance performance with interactivity.
+
+## The Foundation: Next.js App Router
+
+The core of Gamefolio is **Next.js 14+ with the App Router**. The decision to use the App Router over the traditional Pages Router was driven by three main factors:
+
+1.  **React Server Components (RSC):** By default, components in the App Router are Server Components. This allowed me to keep the JavaScript bundle size minimal for content-heavy pages like the blog and about page. Only the interactive elements—like game wrappers and animations—are opted into the client.
+2.  **Streaming and Suspense:** Given the goal of high visual impact, the ability to stream UI chunks allows for a faster perceived load time. I can show a skeleton while the heavy game assets or MDX content are being processed.
+3.  **Nested Layouts:** The layout system in the App Router is much more powerful for a gaming site where I might want different persistent sidebars or HUD elements across different game categories.
+
+## Styling: TailwindCSS and Framer Motion
+
+For styling, I opted for **TailwindCSS**. In a project where "Rich Aesthetics" and "Premium Feel" are requirements, Tailwind provides the speed to iterate on complex gradients and glassmorphism effects without leaving the markup.
+
+```tsx
+// Example of a premium card using Tailwind
+export function GameCard({ title, description }: GameCardProps) {
+  return (
+    <div className="group relative overflow-hidden rounded-xl border border-white/10 bg-black/40 p-1 backdrop-blur-md transition-all hover:border-cyan-500/50">
+      <div className="relative z-10 p-6">
+        <h3 className="text-xl font-bold text-white group-hover:text-cyan-400">{title}</h3>
+        <p className="mt-2 text-sm text-gray-400">{description}</p>
+      </div>
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 opacity-0 transition-opacity group-hover:opacity-100" />
+    </div>
+  );
+}
+```
+
+To bring the UI to life, I integrated **Framer Motion**. The combination of Tailwind's utility classes and Framer's declarative animations allows for sophisticated entrance effects and hover states that make the site feel "alive."
+
+## Content Management: MDX
+
+Since the blog is a first-class citizen in Gamefolio, I needed a way to write technical content that could also render live code examples or interactive widgets. **MDX** was the natural choice.
+
+MDX allows me to import React components directly into Markdown files. This means a tutorial about Canvas can actually include a live Canvas demo embedded within the text.
+
+```mdx
+import { SnakeGamePreview } from '@/components/games/snake';
+
+Check out the game in action below:
+
+<SnakeGamePreview />
+```
+
+## Testing Strategy: Vitest
+
+Despite being a portfolio, reliability is key. I chose **Vitest** for unit and component testing. It's significantly faster than Jest and integrates seamlessly with the Vite ecosystem that Next.js uses under the hood for some parts of its tooling.
+
+My strategy involves:
+-   **Unit Tests:** Testing utility functions for MDX parsing and data fetching.
+-   **Component Tests:** Using React Testing Library with Vitest to ensure UI components like the `Container` or `Badge` render correctly with various props.
+
+## The Server/Client Split Strategy
+
+One of the most critical architectural decisions was the **Server/Client Component split**. To optimize for SEO and performance, I followed these rules:
+
+-   **Data-heavy pages (Blog Index, Post Layout):** Kept as Server Components. These fetch data directly from the filesystem or a database and render on the server.
+-   **Interactive Wrappers:** Small "islands" of interactivity (HUDs, Game Controls, Filters) are marked with `'use client'`.
+-   **State Management:** I minimize global state, preferring to pass data down from Server Components where possible. When local state is needed, it's encapsulated in the leaf-node components.
+
+## Conclusion
+
+The architecture of Gamefolio is designed for scalability and visual excellence. By leveraging the latest features of Next.js and combining them with powerful tools like Tailwind and MDX, I've created a platform that is both high-performance and highly interactive.
+
+In the next post, I'll dive into how these decisions enabled the development of my HTML5 Canvas games.

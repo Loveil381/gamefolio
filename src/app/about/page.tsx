@@ -24,28 +24,30 @@ const techCategories = [
     {
         title: 'Frontend',
         color: 'cyan' as const,
-        items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion']
+        items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'GSAP']
     },
     {
-        title: 'Backend',
+        title: 'Backend & Tools',
         color: 'purple' as const,
-        items: ['Node.js', 'Express', 'PostgreSQL', 'REST APIs', 'GraphQL']
+        items: ['Node.js', 'PostgreSQL', 'Prisma', 'Git', 'Docker', 'Vercel']
     },
     {
-        title: 'Tools',
+        title: 'Game Dev',
         color: 'default' as const,
-        items: ['Git', 'GitHub', 'Figma', 'Docker', 'Vercel']
+        items: ['HTML5 Canvas', 'WebGL', 'Three.js', 'Shaders (GLSL)', 'Socket.io']
     },
     {
-        title: 'Currently Learning',
+        title: 'Process',
         color: 'cyan' as const,
-        items: ['WebGL', 'Three.js', 'Rust', 'Godot']
+        items: ['Agile', 'Unit Testing', 'CI/CD', 'AI-Pair Programming', 'Technical Writing']
     }
+
 ];
 
 const statsData = [
-    { label: 'Games Built', value: 5, suffix: '' },
-    { label: 'Lines of Code', value: 50, suffix: 'k+' },
+    { label: 'Games Built', value: 12, suffix: '' },
+    { label: 'Lines of Code', value: 120, suffix: 'k+' },
+
 ];
 
 export default function AboutPage() {
@@ -62,9 +64,11 @@ export default function AboutPage() {
 
                     <AboutHeroTextAnimation>
                         <Text size="xl" variant="secondary" className="leading-relaxed text-center">
-                            A developer who loves building games and interactive web experiences.
-                            I believe the best way to learn is by creating things that are fun to use.
+                            I am a software engineer passionate about the intersection of game development and modern web engineering.
+                            My mission is to build immersive, performant, and interactive experiences that push the boundaries of what&apos;s possible in a browser.
+                            I&apos;m always open to new opportunities to collaborate on innovative projects.
                         </Text>
+
                     </AboutHeroTextAnimation>
                 </Container>
             </Section>

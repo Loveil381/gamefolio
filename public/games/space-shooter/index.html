@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Space Shooter</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#0a0a0f">
+</head>
+
+<body>
+    <div id="game-container">
+        <!-- Main Game Canvas -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- UI Overlay -->
+        <div id="ui-overlay">
+            <div id="hud">
+                <div class="score-container">Score: <span id="score">0</span></div>
+                <div class="waves-container">Wave: <span id="wave">1</span></div>
+                <div class="lives-container">
+                    Lives: <span id="lives-display">
+                        <span class="life-icon">♥</span>
+                        <span class="life-icon">♥</span>
+                        <span class="life-icon">♥</span>
+                    </span>
+                </div>
+            </div>
+
+            <div id="start-screen" class="screen active">
+                <h1>Space Shooter</h1>
+                <p>Defend the galaxy against endless waves of enemies.</p>
+                <div class="controls-info">
+                    <p>Desktop: <strong>Left/Right Arrows</strong> to move, <strong>Space</strong> to shoot.</p>
+                    <p>Mobile: <strong>Tap left/right</strong> sides to move, auto-fire enabled.</p>
+                </div>
+                <button id="start-btn" class="action-btn">Start Game</button>
+            </div>
+
+            <div id="game-over-screen" class="screen">
+                <h2>Game Over</h2>
+                <p>Final Score: <span id="final-score">0</span></p>
+                <p>Wave Reached: <span id="final-wave">1</span></p>
+                <button id="restart-btn" class="action-btn">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Touch Controls (Mobile) -->
+        <div id="touch-controls">
+            <div id="touch-left" class="touch-zone"></div>
+            <div id="touch-right" class="touch-zone"></div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

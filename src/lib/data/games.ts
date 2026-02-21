@@ -50,6 +50,16 @@ export const games: Game[] = [
         thumbnailColor: 'bg-zinc-800',
         playUrl: '/games/snake/index.html',
         developmentStory: 'A standalone homage to the classic retro snake game, built entirely with vanilla JavaScript and the Canvas API. Optimized for both desktop arrow keys and mobile swipe controls.',
+    },
+    {
+        slug: 'space-shooter',
+        title: 'Space Shooter',
+        description: 'Defend the galaxy against endless waves of enemies in this fast-paced arcade shooter.',
+        techStack: [{ name: 'HTML5 Canvas' }, { name: 'Vanilla JS' }, { name: 'Game Physics' }],
+        genre: 'Arcade',
+        thumbnailColor: 'bg-fuchsia-900',
+        playUrl: '/games/space-shooter/index.html',
+        developmentStory: 'A fast-paced arcade shooter built from scratch with zero dependencies using vanilla JavaScript and HTML5 Canvas. Features include particle explosion effects, increasing difficulty waves, and full touch support for mobile devices.',
     }
 ];
 

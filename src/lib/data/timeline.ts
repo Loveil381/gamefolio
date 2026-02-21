@@ -14,32 +14,33 @@ export interface TimelineMilestone {
 export const timelineData: TimelineMilestone[] = [
     {
         year: '2020',
-        title: 'Hello World',
-        description: 'Wrote my first line of code and discovered a passion for programming. Started learning Web Development fundamentals: HTML, CSS, and basic JavaScript.',
+        title: 'The Journey Begins',
+        description: 'Wrote my first line of Python and discovered the magic of making computers solve problems. Started with automation scripts and basic web fundamentals.',
         icon: '🚀',
     },
     {
         year: '2021',
-        title: 'Frontend Frameworks',
-        description: 'Dived deeper into React and single-page applications. Built a few small personal projects and an initial portfolio to showcase my learning.',
-        icon: '⚛️',
+        title: 'First Game Project',
+        description: 'Built a standalone Snake game using vanilla JavaScript and HTML5 Canvas. This project sparked my deep interest in interactive graphics and game loops.',
+        icon: '🎮',
     },
     {
         year: '2022',
-        title: 'Full Stack Journey',
-        description: 'Learned backend technologies like Node.js and Express. Deployed my first full-stack application with a database and user authentication.',
-        icon: '🛠️',
+        title: 'Mastering the Modern Web',
+        description: 'Dived headfirst into React and the TypeScript ecosystem. Focused on building scalable frontend architectures and reusable component libraries.',
+        icon: '⚛️',
     },
     {
         year: '2023',
-        title: 'Focus on Performance',
-        description: 'Transitioned to Next.js for server-side rendering and static site generation. Focused on building highly performant and accessible web experiences.',
+        title: 'Building Gamefolio',
+        description: 'Synthesized my love for games and web engineering by building this portfolio. Leveraged Next.js App Router for high-performance content delivery.',
         icon: '⚡',
     },
     {
         year: '2024',
-        title: 'Creative Coding & Games',
-        description: 'Started exploring WebGL, Three.js, and browser-based game development to build interactive and playful web applications inside Gamefolio.',
-        icon: '🎮',
+        title: 'AI-Assisted Development',
+        description: 'Exploring the intersection of AI and software engineering. Leveraging LLMs to accelerate development workflows and build more complex interactive experiences.',
+        icon: '🤖',
     },
+
 ];
