@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     try {
         const post = getPostBySlug(slug);
         return {
-            title: `${post.frontmatter.title} | Gamefolio Blog`,
+            title: post.frontmatter.title,
             description: post.frontmatter.excerpt,
         };
     } catch {

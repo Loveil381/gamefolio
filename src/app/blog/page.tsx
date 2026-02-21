@@ -8,7 +8,7 @@ import { Card } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 
 export const metadata = {
-    title: 'Blog | Gamefolio',
+    title: 'Blog',
     description: 'Read the latest blog posts on Gamefolio',
 };
 
