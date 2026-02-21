@@ -14,6 +14,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://gamefolio.vercel.app'),
   title: {
     template: '%s | Gamefolio',
     default: 'Gamefolio | Developer Portfolio & Games',
