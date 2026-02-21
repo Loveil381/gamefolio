@@ -33,8 +33,6 @@ const GAME_STATE = {
 
 // Core Game variables
 let canvas, ctx;
-let lastTime = 0;
-let requestID;
 let currentState = GAME_STATE.MENU;
 let scale = 1;
 
@@ -50,7 +48,6 @@ let score = 0;
 let lives = 3;
 let wave = 1;
 
-let frames = 0; // For timing
 let enemySpawnTimer = 0;
 let enemySpawnRate = 120; // Spawn every X frames initially
 
@@ -193,7 +190,6 @@ function startGame() {
     score = 0;
     lives = 3;
     wave = 1;
-    frames = 0;
     enemySpawnRate = 120;
 
     // Clear entities
@@ -223,7 +219,7 @@ function gameOver() {
     goScreen.classList.add('active');
 }
 
-function gameLoop(timestamp) {
+function gameLoop() {
     // Calculate delta time if needed, though we use fixed updates here based on frames
     // const deltaTime = timestamp - lastTime;
     // lastTime = timestamp;
@@ -231,7 +227,7 @@ function gameLoop(timestamp) {
     update();
     draw();
 
-    requestID = requestAnimationFrame(gameLoop);
+    requestAnimationFrame(gameLoop);
 }
 
 function update() {
@@ -242,7 +238,6 @@ function update() {
     }
 
     if (currentState === GAME_STATE.PLAYING) {
-        frames++;
 
         updateBackground();
         player.update();
