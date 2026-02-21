@@ -14,35 +14,26 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://gamefolio.vercel.app'),
+  metadataBase: new URL('https://gamefolio-three.vercel.app'),
   title: {
     template: '%s | Gamefolio',
     default: 'Gamefolio | Developer Portfolio & Games',
   },
-  description: 'A production-grade developer portfolio showcasing playable browser games, technical blog posts, and case studies.',
-  keywords: ['Game Developer', 'Web Developer', 'Portfolio', 'Browser Games', 'React', 'Next.js', 'TypeScript', 'Three.js'],
-  authors: [{ name: 'Developer Name' }],
+  description: 'A production-grade developer portfolio built with Next.js, showcasing playable browser games and technical articles.',
+  keywords: ['Game Developer', 'Web Developer', 'Portfolio', 'Browser Games', 'React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+  authors: [{ name: 'Gamefolio Developer' }],
   openGraph: {
     title: 'Gamefolio | Developer Portfolio & Games',
-    description: 'A production-grade developer portfolio showcasing playable browser games, technical blog posts, and case studies.',
-    url: 'https://gamefolio.vercel.app', // Placeholder URL
+    description: 'A production-grade developer portfolio built with Next.js, showcasing playable browser games and technical articles.',
+    url: 'https://gamefolio-three.vercel.app',
     siteName: 'Gamefolio',
-    images: [
-      {
-        url: '/og-image.jpg', // Placeholder image
-        width: 1200,
-        height: 630,
-        alt: 'Gamefolio - Developer Portfolio & Games',
-      },
-    ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Gamefolio | Developer Portfolio & Games',
-    description: 'A production-grade developer portfolio showcasing playable browser games, technical blog posts, and case studies.',
-    images: ['/og-image.jpg'],
+    description: 'A production-grade developer portfolio built with Next.js, showcasing playable browser games and technical articles.',
   },
 };
 

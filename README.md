@@ -1,113 +1,112 @@
-# Gamefolio
+# 🎮 Gamefolio
 
-A modern, interactive portfolio for showcasing frontend engineering skills and web-based games.
+A high-performance, interactive developer portfolio built with the latest web technologies. This project showcases visually rich web experiences and playable browser-based games, emphasizing **Server-Side Rendering (SSR)**, **accessibility**, and **modern UI/UX design**.
 
-![CI Status](https://github.com/Loveil381/gamefolio/actions/workflows/ci.yml/badge.svg)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://gamefolio-three.vercel.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+🔗 **Live Demo:** [https://gamefolio-three.vercel.app](https://gamefolio-three.vercel.app)
 
 ---
-
-> **Screenshot Placeholder**
-> *(Insert an eye-catching screenshot of the home page or a featured game here once the design is finalized).*
-
----
-
-## 🚀 Tech Stack
-
-- **Framework:** [Next.js](https://nextjs.org/) (App Router)
-- **Library:** [React](https://react.dev/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/)
-- **Testing:** [Vitest](https://vitest.dev/) & React Testing Library
 
 ## ✨ Features
 
-- **Interactive Games:** Playable HTML5 Canvas games built from scratch (e.g., classic Snake).
-- **Responsive Design:** A fully responsive layout supporting all device sizes.
-- **Dark Mode:** System-aware thematic toggle with smooth transitions.
-- **Blog Infrastructure:** MDX-based blogging system for technical articles.
-- **Modern Aesthetics:** Vibrant design with glassmorphism and micro-animations.
+- **🕹️ Playable Browser Games:** Integrated HTML5 Canvas games (Snake, Space Shooter) with smooth loops and mobile touch support.
+- **🚀 Advanced SSR/RSC:** Optimized with Next.js App Router and React Server Components for lightning-fast initial loads.
+- **🎨 Cyberpunk Aesthetic:** Responsive design featuring glassmorphism, glowing neon SVGs, and fluid micro-animations.
+- **📝 MDX Blog:** Technical blogging infrastructure with syntax highlighting and automatic metadata extraction.
+- **🔒 Production Ready:** 100% TypeScript (strict mode), automated Vitest suite, and accessible UI components.
 
-## 🛠️ Getting Started
+---
 
-Follow these steps to set up the project locally:
+## 🛠️ Tech Stack
 
-### 1. Clone the repository
+| Layer | Technologies |
+| :--- | :--- |
+| **Framework** | Next.js 15 (App Router), React 19 |
+| **Styling** | Tailwind CSS, Lucide Icons |
+| **Animation** | Framer Motion, Pure CSS SVG Animations |
+| **Content** | MDX, Gray-matter |
+| **Testing** | Vitest, React Testing Library, ESLint |
+| **Icons** | Custom SVGs, Lucide |
 
-```bash
-git clone https://github.com/Loveil381/gamefolio.git
-cd gamefolio
-```
+---
 
-### 2. Install dependencies
+## 🏗️ Architecture Overview
 
-```bash
-npm install
-```
+This project follows the **Client-Server Split** pattern recommended by Next.js to maximize performance while maintaining interactivity:
 
-### 3. Environment Setup
+- **Server Components (RSC):** All layout shells, data-fetching logic, and static content (e.g., Blog posts, Game lists) are rendered on the server.
+- **Client Components:** Interactivity (Form validation, Game loops, Filter logic) and complex animations are encapsulated in highly focused client-side wrappers.
+- **Design System:** Built on top of a centralized set of Tailwind design tokens for consistent spacing, colors, and typography.
 
-Copy `.env.example` to create your local environment file:
-
-```bash
-cp .env.example .env.local
-```
-
-### 4. Run the development server
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
-
-### 5. Build and Test
-
-To build the application for production:
-
-```bash
-npm run build
-```
-
-To run the automated test suite:
-
-```bash
-npx vitest run
-```
-
-To run linter checks:
-
-```bash
-npm run lint
-```
+---
 
 ## 📁 Project Structure
 
-```plaintext
+```bash
 gamefolio/
-├── .github/          # GitHub Actions workflows
-├── public/           # Static assets (images, fonts, raw games)
+├── .github/          # CI/CD Workflows (GitHub Actions)
+├── public/           # Static assets & standalone Canvas games
 ├── src/
-│   ├── app/          # Next.js App Router pages and layouts
-│   ├── components/   # Reusable UI components
-│   ├── hooks/        # Custom React hooks
-│   ├── lib/          # Utility functions and shared logic
-│   └── types/        # TypeScript type definitions
-├── .env.example      # Example environment variables
-├── package.json      # Project dependencies and scripts
-├── tailwind.config.ts # Tailwind CSS configuration
-└── vercel.json       # Deployment configuration for Vercel
+│   ├── app/          # Next.js App Router (Pages, Layouts, Metadata)
+│   ├── components/
+│   │   ├── layout/   # Global UI (Header, Footer, Navigation)
+│   │   ├── ui/       # Atom-level Design System components
+│   │   └── [feature] # Feature-specific components (Home, Games, Blog)
+│   ├── hooks/        # Reusable React hooks (Theme, Storage)
+│   ├── lib/          # Utilities, shared data, and MDX processing
+│   └── types/        # Global TypeScript interfaces
+├── tailwind.config.ts # Design system configuration
+└── vercel.json       # Deployment optimization
 ```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisite
+Ensure you have [Node.js 18+](https://nodejs.org/) installed.
+
+### 2. Installation
+```bash
+git clone https://github.com/Loveil381/gamefolio.git
+cd gamefolio
+npm install
+```
+
+### 3. Development
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### 4. Build & Verify
+```bash
+npm run build     # Production build
+npm run lint      # Code quality check
+npx vitest run    # Run test suite
+```
+
+---
 
 ## 🌐 Deployment
 
-The easiest way to deploy this Next.js app is to use the [Vercel Platform](https://vercel.com/new).
+The project is optimized for **Vercel**. Every push to `main` triggers an automatic deployment.
 
-1. Push your code to your GitHub repository.
-2. Import the project into Vercel.
-3. Vercel will automatically detect Next.js and apply the correct build settings (also defined in `vercel.json`).
-4. Ensure environment variables correspond to deployment environments.
+1. Connect your GitHub repository to Vercel.
+2. Vercel automatically detects the Next.js framework.
+3. Set any necessary environment variables in the Vercel dashboard.
+
+---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+---
+
+*Built with ❤️ by Gamefolio Developer*

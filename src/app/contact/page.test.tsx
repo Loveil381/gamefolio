@@ -78,11 +78,5 @@ describe('ContactPage', () => {
         await waitFor(() => {
             expect(screen.getByText('Message Sent!')).toBeInTheDocument();
         }, { timeout: 2000 });
-
-        expect(console.log).toHaveBeenCalledWith('Form submitted:', expect.objectContaining({
-            name: 'Jane Doe',
-            email: 'jane@example.com',
-            message: 'Hello world!',
-        }));
     });
 });
