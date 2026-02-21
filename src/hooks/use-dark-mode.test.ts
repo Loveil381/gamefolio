@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { useDarkMode } from './use-dark-mode';
 
 describe('useDarkMode', () => {
-    let mockMatchMedia: any;
+    let mockMatchMedia: ReturnType<typeof vi.fn>;
 
     beforeEach(() => {
         // Reset DOM
@@ -11,7 +11,7 @@ describe('useDarkMode', () => {
         localStorage.clear();
 
         // Mock matchMedia
-        mockMatchMedia = vi.fn().mockImplementation((query) => ({
+        mockMatchMedia = vi.fn().mockImplementation((query: string) => ({
             matches: false,
             media: query,
             onchange: null,
@@ -21,7 +21,7 @@ describe('useDarkMode', () => {
             removeEventListener: vi.fn(),
             dispatchEvent: vi.fn(),
         }));
-        window.matchMedia = mockMatchMedia;
+        window.matchMedia = mockMatchMedia as unknown as typeof window.matchMedia;
     });
 
     it('initializes with system theme by default', () => {

@@ -11,7 +11,7 @@ vi.mock('@/hooks/use-dark-mode', () => ({
 }));
 
 vi.mock('next/link', () => ({
-    default: ({ children, href }: any) => <a href={href}>{children}</a>,
+    default: ({ children, href }: { children: React.ReactNode; href: string }) => <a href={href}>{children}</a>,
 }));
 
 describe('Header', () => {
@@ -29,7 +29,7 @@ describe('Header', () => {
     });
 
     it('toggles mobile menu', () => {
-        const { getByLabelText, queryByText } = render(<Header />);
+        const { getByLabelText } = render(<Header />);
 
         // Initially mobile links wrapper isn't rendered or is visually hidden
         // We check via aria-expanded
