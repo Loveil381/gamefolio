@@ -12,79 +12,101 @@ export default function NotFound() {
     return (
         <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-4 relative z-10">
 
-            {/* Animated SVG Character */}
-            <div className="mb-8 relative w-48 h-48 md:w-64 md:h-64 mx-auto">
+            {/* Animated SVG */}
+            <div className="mb-8 relative w-full max-w-lg h-64 mx-auto">
                 <svg
                     width="100%"
                     height="100%"
-                    viewBox="0 0 100 100"
+                    viewBox="0 0 400 200"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <style>
                         {`
-              @keyframes hoverGhost {
-                0% { transform: translateY(0px); }
-                50% { transform: translateY(-10px); }
-                100% { transform: translateY(0px); }
-              }
-              @keyframes blinkEyes {
-                0%, 45%, 55%, 100% { transform: scaleY(1); }
-                50% { transform: scaleY(0.1); }
-              }
-              @keyframes colorPulse {
-                0%, 100% { fill: #ef4444; }
-                50% { fill: #f87171; }
-              }
-              @keyframes glitch {
-                0% { transform: translate(0); }
-                20% { transform: translate(-2px, 2px); }
-                40% { transform: translate(-2px, -2px); }
-                60% { transform: translate(2px, 2px); }
-                80% { transform: translate(2px, -2px); }
-                100% { transform: translate(0); }
-              }
-              .ghost-group { animation: hoverGhost 3s ease-in-out infinite; transform-origin: center; }
-              .eyes { animation: blinkEyes 4s infinite; transform-origin: center; }
-              .ghost-body { animation: colorPulse 3s infinite; }
-              .glitch-text { animation: glitch 0.5s infinite; transform-origin: center; }
-            `}
+                          @keyframes crtFlicker {
+                            0% { opacity: 0.9; text-shadow: 0 0 4px #ff0055, 2px 2px 0px rgba(0, 255, 255, 0.5); }
+                            4% { opacity: 0.9; }
+                            5% { opacity: 0.2; transform: translate(-2px, 1px); }
+                            6% { opacity: 0.9; transform: translate(0, 0); }
+                            10% { opacity: 0.9; }
+                            11% { opacity: 1; text-shadow: 0 0 10px #ff0055, -2px -2px 0px rgba(0, 255, 255, 0.5); }
+                            12% { opacity: 0.8; }
+                            100% { opacity: 0.9;  }
+                          }
+                          @keyframes scanline {
+                            0% { transform: translateY(-100%); }
+                            100% { transform: translateY(100%); }
+                          }
+                          @keyframes pulseSubtitle {
+                            0%, 100% { opacity: 1; }
+                            50% { opacity: 0.1; }
+                          }
+                          .glitch-text {
+                            font-family: 'Courier New', Courier, monospace;
+                            font-weight: 900;
+                            font-size: 52px;
+                            fill: #ff0055;
+                            animation: crtFlicker 3s infinite;
+                            transform-origin: center;
+                          }
+                          .subtitle {
+                            font-family: 'Courier New', Courier, monospace;
+                            font-weight: bold;
+                            font-size: 18px;
+                            fill: #00f0ff;
+                            animation: pulseSubtitle 1.5s steps(2, start) infinite;
+                          }
+                          .scanline-overlay {
+                            pointer-events: none;
+                            animation: scanline 8s linear infinite;
+                          }
+                        `}
                     </style>
 
-                    <g className="ghost-group">
-                        {/* Pixel Character Body */}
-                        <path
-                            className="ghost-body"
-                            d="M 20 40 C 20 20, 80 20, 80 40 
-                 L 80 80 
-                 L 70 70 L 60 80 
-                 L 50 70 L 40 80 
-                 L 30 70 L 20 80 Z"
-                        />
-                        {/* Eyes */}
-                        <g className="eyes" fill="#ffffff">
-                            <rect x="35" y="35" width="10" height="10" />
-                            <rect x="55" y="35" width="10" height="10" />
-                        </g>
-                        <g className="eyes" fill="#000000">
-                            <rect x="38" y="38" width="4" height="4" />
-                            <rect x="58" y="38" width="4" height="4" />
-                        </g>
-                    </g>
+                    <defs>
+                        <pattern id="scanlines" patternUnits="userSpaceOnUse" width="4" height="4">
+                            <rect width="4" height="2" fill="rgba(0,0,0,0.1)" />
+                            <rect y="2" width="4" height="2" fill="rgba(255,255,255,0.05)" />
+                        </pattern>
+                        <filter id="crt-glow">
+                            <feGaussianBlur stdDeviation="2" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
 
-                    {/* Game Over Text overlay on top of SVG */}
+                    {/* Background screen */}
+                    <rect width="400" height="200" fill="#050510" rx="10" />
+
+                    {/* Game Over Text */}
                     <text
-                        x="50"
-                        y="95"
+                        x="50%"
+                        y="45%"
                         textAnchor="middle"
-                        fill="#ff0044"
-                        fontWeight="bold"
-                        fontSize="14"
-                        fontFamily="monospace"
+                        dominantBaseline="middle"
                         className="glitch-text"
-                        style={{ textShadow: "0px 0px 5px #ff0044" }}
+                        filter="url(#crt-glow)"
                     >
                         GAME OVER
                     </text>
+
+                    {/* Subtitle */}
+                    <text
+                        x="50%"
+                        y="75%"
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        className="subtitle"
+                        filter="url(#crt-glow)"
+                    >
+                        INSERT COIN TO CONTINUE
+                    </text>
+
+                    {/* Scanline pattern over everything */}
+                    <rect width="400" height="200" fill="url(#scanlines)" rx="10" />
+
+                    {/* Moving wide scanline */}
+                    <g className="scanline-overlay">
+                        <rect x="0" y="0" width="400" height="20" fill="rgba(255,255,255,0.03)" />
+                    </g>
                 </svg>
             </div>
 

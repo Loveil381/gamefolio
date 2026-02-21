@@ -1,23 +1,18 @@
 import React from 'react';
 
-/**
- * Prop types for the LoadingSpinner component.
- */
-interface LoadingSpinnerProps {
-    /** Optional CSS class name */
+export interface LoadingSpinnerProps {
     className?: string;
-    /** Size multiplier, default is 1 (approx 64px width) */
     size?: number;
+    primaryColor?: string;
+    accentColor?: string;
 }
 
-/**
- * A custom loading spinner SVG component featuring a pixelated game controller
- * that slowly rotates and pulses with a neon gaming vibe.
- *
- * @param {LoadingSpinnerProps} props - The component props.
- * @returns {React.ReactElement} The LoadingSpinner component.
- */
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ className = '', size = 1 }) => {
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+    className = '',
+    size = 1,
+    primaryColor = '#00f0ff',
+    accentColor = '#a855f7'
+}) => {
     const baseSize = 64 * size;
 
     return (
@@ -30,66 +25,51 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ className = '', 
             <svg
                 width="100%"
                 height="100%"
-                viewBox="0 0 64 64"
+                viewBox="0 0 100 100"
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <style>
                     {`
-            @keyframes floatRot {
-              0% { transform: rotate(0deg) translateY(0); }
-              25% { transform: rotate(5deg) translateY(-2px); }
-              50% { transform: rotate(0deg) translateY(0); opacity: 0.7; }
-              75% { transform: rotate(-5deg) translateY(-2px); }
-              100% { transform: rotate(0deg) translateY(0); }
-            }
-            @keyframes dpadPulse {
-              0%, 100% { opacity: 1; }
-              50% { opacity: 0.5; }
-            }
-            @keyframes buttonBlink {
-              0%, 100% { fill: #a855f7; }
-              50% { fill: #00f0ff; }
-            }
-            .controller-body { animation: floatRot 3s ease-in-out infinite; transform-origin: 32px 32px; }
-            .dpad { animation: dpadPulse 1.5s infinite alternate; }
-            .action-btn-1 { animation: buttonBlink 1s step-end infinite; }
-            .action-btn-2 { animation: buttonBlink 1s step-end infinite 0.5s; }
-          `}
+                        @keyframes rotateController {
+                            0% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 5px ${primaryColor}); }
+                            50% { transform: rotate(180deg) scale(1.1); filter: drop-shadow(0 0 15px ${accentColor}); }
+                            100% { transform: rotate(360deg) scale(1); filter: drop-shadow(0 0 5px ${primaryColor}); }
+                        }
+                        @keyframes pulseDots {
+                            0%, 100% { opacity: 1; }
+                            50% { opacity: 0.2; }
+                        }
+                        .neon-spinner {
+                            transform-origin: 50px 50px;
+                            animation: rotateController 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+                        }
+                        .neon-btn {
+                            animation: pulseDots 1s infinite alternate;
+                        }
+                    `}
                 </style>
-
-                {/* Glow Filter */}
                 <defs>
-                    <filter id="controllerGlow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="2" result="blur" />
-                        <feMerge>
-                            <feMergeNode in="blur" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
+                    <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
                     </filter>
                 </defs>
-
-                <g className="controller-body" filter="url(#controllerGlow)">
-                    {/* Main Controller Body (Pixelated Rectangles) */}
+                <g className="neon-spinner" filter="url(#neon-glow)">
+                    {/* Pixel Controller Outline */}
                     <path
-                        d="M 16 20 h 32 v 4 h 4 v 4 h 4 v 16 h -4 v 4 h -4 v -8 h -12 v 8 h -8 v -8 H 20 v 8 h -4 v -4 h -4 v -16 h 4 v -4 h 4 z"
-                        fill="#1f2937"
-                        stroke="#00f0ff"
-                        strokeWidth="2"
+                        d="M 20 35 L 80 35 L 90 45 L 90 65 L 80 75 L 60 75 L 50 65 L 40 75 L 20 75 L 10 65 L 10 45 Z"
+                        fill="none"
+                        stroke={primaryColor}
+                        strokeWidth="4"
+                        strokeLinejoin="miter"
                     />
 
                     {/* D-Pad */}
-                    <g className="dpad" fill="#00f0ff">
-                        <rect x="18" y="28" width="4" height="12" />
-                        <rect x="14" y="32" width="12" height="4" />
-                    </g>
-
-                    {/* Start / Select Buttons */}
-                    <rect x="26" y="34" width="4" height="2" fill="#9ca3af" />
-                    <rect x="34" y="34" width="4" height="2" fill="#9ca3af" />
+                    <path d="M 25 50 L 35 50 M 30 45 L 30 55" stroke={accentColor} strokeWidth="4" strokeLinecap="square" />
 
                     {/* Action Buttons */}
-                    <rect x="44" y="34" width="4" height="4" className="action-btn-1" />
-                    <rect x="48" y="28" width="4" height="4" className="action-btn-2" />
+                    <rect x="65" y="45" width="6" height="6" fill={accentColor} className="neon-btn" style={{ animationDelay: '0s' }} />
+                    <rect x="75" y="55" width="6" height="6" fill={accentColor} className="neon-btn" style={{ animationDelay: '0.5s' }} />
                 </g>
             </svg>
         </div>
